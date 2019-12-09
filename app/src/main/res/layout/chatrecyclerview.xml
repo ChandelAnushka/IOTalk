@@ -69,6 +69,8 @@
 
         <TextView
             android:id="@+id/chatListName"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -109,6 +111,8 @@
 
                 <TextView
                     android:id="@+id/textViewNoOfUnseenMessages"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginStart="10dp"
@@ -124,6 +128,8 @@
 
             <TextView
                 android:id="@+id/textViewTimeOfMessage"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
