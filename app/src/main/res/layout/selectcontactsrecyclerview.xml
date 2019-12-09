@@ -77,6 +77,8 @@
 
             <TextView
                 android:id="@+id/selectContactsName"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -97,6 +99,8 @@
 
             <TextView
                 android:id="@+id/selectContactsPhoneNo"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -117,6 +121,8 @@
 
             <TextView
                 android:id="@+id/selectContactsStatus"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
