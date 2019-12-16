@@ -72,8 +72,6 @@ public class NewGroupFormation extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     TextView newgroupTextView;
-    EditText searchBoxEditText;
-    ImageView searchIcon;
 
     String UID;
     String downloadUrl;
@@ -122,8 +120,8 @@ public class NewGroupFormation extends AppCompatActivity {
         groupDescription = findViewById(R.id.editTextGroupDescriptionNewGroup);
         recyclerViewNewGroup = (RecyclerView) findViewById(R.id.recyclerViewNewGroup);
         groupImage = findViewById(R.id.imageViewCameraIconNewGroup);
-        searchIcon = findViewById(R.id.viewSearchNewGroup);
-        searchBoxEditText = findViewById(R.id.searchBox);
+
+
         newgroupTextView = findViewById(R.id.textViewNewGroup);
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
@@ -193,32 +191,6 @@ public class NewGroupFormation extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {}
         };
         firebaseDatabaseUserRef.addListenerForSingleValueEvent(valueEventListener);
-
-
-        searchIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                searchBoxEditText.setVisibility(View.VISIBLE);
-                newgroupTextView.setVisibility(View.GONE);
-            }
-        });
-
-        searchBoxEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
-        });
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerViewNewGroup.setLayoutManager(mLayoutManager);
