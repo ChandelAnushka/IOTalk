@@ -55,7 +55,7 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
 
         }
     }
-    public RecyclerAdapterChatList(Context context ,List<User> userList)
+    public RecyclerAdapterChatList(Context context , List<ChatList.ChatListItem> userList)
     {
         this.context=context;
         this.userList = userList;
