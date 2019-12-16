@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import in.codepredators.delta.Classes.DatabaseHelperMessage;
 import in.codepredators.delta.Classes.Group;
-import in.codepredators.delta.Classes.IOCamera;
 import in.codepredators.delta.Classes.Message;
 import in.codepredators.delta.Classes.PersonalMessage;
 import in.codepredators.delta.Classes.RealPathUtil;
@@ -299,7 +298,7 @@ public class Chat extends AppCompatActivity {
             }
         }
         wallpaper = 0;
-        }
+    }
     static ImageView replySelectedMessage;
     @Override
     public void onBackPressed()
@@ -329,7 +328,7 @@ public class Chat extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-   static TextView chatTextView;
+    static TextView chatTextView;
     public static void setTextInTextView(String Text)
     {
         chatTextView.setVisibility(View.VISIBLE);
@@ -364,23 +363,23 @@ public class Chat extends AppCompatActivity {
         selectedChatStar = findViewById(R.id.selectedChatStarred);
         deleteSelectedMessage = findViewById(R.id.deleteSelectedMessage);
         copySelectedMessage = findViewById(R.id.copySelectedMessage);
-         replySelectedMessage = findViewById(R.id.backSelectedMessage);
-         forwardSelectedMessage = findViewById(R.id.forwardSelectedMessage);
-         chatBackground = findViewById(R.id.imageChatBackground);
+        replySelectedMessage = findViewById(R.id.backSelectedMessage);
+        forwardSelectedMessage = findViewById(R.id.forwardSelectedMessage);
+        chatBackground = findViewById(R.id.imageChatBackground);
 
-         showReplyMessage = findViewById(R.id.showReply);
-         replyMessageView = findViewById(R.id.replyMessageSenderView);
-         replyMessageSenderName = findViewById(R.id.replyMessageSenderName);
-         replyMessageType = findViewById(R.id.replyMessageType);
-         replyMessageCancel = findViewById(R.id.replyMessageCancel);
-         replyMessagePic = findViewById(R.id.replyMessagePic);
+        showReplyMessage = findViewById(R.id.showReply);
+        replyMessageView = findViewById(R.id.replyMessageSenderView);
+        replyMessageSenderName = findViewById(R.id.replyMessageSenderName);
+        replyMessageType = findViewById(R.id.replyMessageType);
+        replyMessageCancel = findViewById(R.id.replyMessageCancel);
+        replyMessagePic = findViewById(R.id.replyMessagePic);
 
-         chatCode = findViewById(R.id.imageCodeChatActivity);
-         menuOptionCaller = findViewById(R.id.imageSettingsChatActivity);
+        chatCode = findViewById(R.id.imageCodeChatActivity);
+        menuOptionCaller = findViewById(R.id.imageSettingsChatActivity);
 
-         searchText = findViewById(R.id.editTextSearchChatScreen);
-         uparrow = findViewById(R.id.uparrow);
-         downarrow = findViewById(R.id.backarrow);
+        searchText = findViewById(R.id.editTextSearchChatScreen);
+        uparrow = findViewById(R.id.uparrow);
+        downarrow = findViewById(R.id.downarrow);
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
         sendMessage.setClickable(false);
@@ -396,17 +395,17 @@ public class Chat extends AppCompatActivity {
         hashmap.put("w","Raj");
         hashmap.put("r","Raj");
         hashmap.put("n","Raj");
-       // final User user =new User("UIDabcd","Nameabcd","Numberabcd","Bioabcd","India","Profileabcd",hashmap,hashmap,hashmap,hashmap,"userLastseen",hashmap,hashmap,hashmap);
+        // final User user =new User("UIDabcd","Nameabcd","Numberabcd","Bioabcd","India","Profileabcd",hashmap,hashmap,hashmap,hashmap,"userLastseen",hashmap,hashmap,hashmap);
 //user2 is opposite partner
 
         final User user2 = new User();
-user2.setUID("8FM1u4ZmRoXwlnOcdBDnATbd8Fw1");
-user2.setUserLastSeen("Online");
+        user2.setUID("8FM1u4ZmRoXwlnOcdBDnATbd8Fw1");
+        user2.setUserLastSeen("Online");
 //user2.setUserNumber(FirebaseDatabase.getInstance().getReference().child("users").child(user2.getUID()).child("userNumber").getKey());
-user2.setUserName("User1");
-user2.setUserProfilePic("https://firebasestorage.googleapis.com/v0/b/iotalk-552e3.appspot.com/o/images.jpg?alt=media&token=7d23a8ac-8684-47be-9a79-5d9ebeb4346c");
-user2.setUserNumber("8318711855");
-user2.setUserLanguages(hashmap);
+        user2.setUserName("User1");
+        user2.setUserProfilePic("https://firebasestorage.googleapis.com/v0/b/iotalk-552e3.appspot.com/o/images.jpg?alt=media&token=7d23a8ac-8684-47be-9a79-5d9ebeb4346c");
+        user2.setUserNumber("8318711855");
+        user2.setUserLanguages(hashmap);
         mAuth = FirebaseAuth.getInstance();
 //        UID = mAuth.getCurrentUser().getUid();
         UID ="MeINhuTy1oYhjiM81QIbzZFhqup1";
@@ -431,10 +430,10 @@ user2.setUserLanguages(hashmap);
 
             if(chatType.equals("personal")){
                 //this detail is given chat list activity
-            personalMessage = new PersonalMessage();
-            personalMessage.setPID(getPID("6205572993", user2.getUserNumber()));
-            personalMessage.setPersonalUserOne(UID);
-            personalMessage.setPersonalUserTwo(user2.getUID());
+                personalMessage = new PersonalMessage();
+                personalMessage.setPID(getPID("6205572993", user2.getUserNumber()));
+                personalMessage.setPersonalUserOne(UID);
+                personalMessage.setPersonalUserTwo(user2.getUID());
             }else{
                 group = new Group();
                 HashMap<String,String> hashmap = new HashMap<>();
@@ -561,32 +560,32 @@ user2.setUserLanguages(hashmap);
 
             @Override
             public void afterTextChanged(Editable s) {
-                    Log.i("searchFromList", "text is changing");
-                    searchedPosition = new ArrayList<>();
-                    String searchString = searchText.getText().toString();
-                    if(searchString.length() > 0) {
-                        for (Message searchMessage : messageList) {
-                            if (searchMessage.getMessageType().charAt(0) == '1') {
-                                if (searchMessage.getMessageText().contains(searchString)) {
-                                    Log.i("searchFromList", "word is in list");
-                                    searchedPosition.add(messageList.indexOf(searchMessage));
-                                }
+                Log.i("searchFromList", "text is changing");
+                searchedPosition = new ArrayList<>();
+                String searchString = searchText.getText().toString();
+                if(searchString.length() > 0) {
+                    for (Message searchMessage : messageList) {
+                        if (searchMessage.getMessageType().charAt(0) == '1') {
+                            if (searchMessage.getMessageText().contains(searchString)) {
+                                Log.i("searchFromList", "word is in list");
+                                searchedPosition.add(messageList.indexOf(searchMessage));
                             }
                         }
-                        Log.i("searchFromList", "before selected index");
-
-                        recyclerAdapterGroupText1.selectedIndex(searchedPosition, searchText.getText().toString());
-                        recyclerAdapterGroupText1.notifyDataSetChanged();
-                        Log.i("searchFromList", "after selected index");
-
-
-                        index = searchedPosition.size() - 1;
-                        Log.i("searchFromList", "smooth scroll completed");
-                        //color of complete message item
-                        //up and down arrow function
                     }
-                    if(searchString.length() == 0)
-                        try {
+                    Log.i("searchFromList", "before selected index");
+
+                    recyclerAdapterGroupText1.selectedIndex(searchedPosition, searchText.getText().toString());
+                    recyclerAdapterGroupText1.notifyDataSetChanged();
+                    Log.i("searchFromList", "after selected index");
+
+
+                    index = searchedPosition.size() - 1;
+                    Log.i("searchFromList", "smooth scroll completed");
+                    //color of complete message item
+                    //up and down arrow function
+                }
+                if(searchString.length() == 0)
+                    try {
                         searchedPosition.clear();
                         index = 0;
                         recyclerAdapterGroupText1.cancelSelectedIndex();
@@ -606,15 +605,15 @@ user2.setUserLanguages(hashmap);
             public void onClick(View v) {
                 Log.i("searchFromList","downarrowclicked");
                 index = index + 1;
-              try
-              {
-                  messagesRecycler.smoothScrollToPosition(searchedPosition.get(index));
-                  Log.i("searchFromList","scroll is completed");
-              }
-              catch(Exception e)
-              {
-                  index = index - 1;
-              }
+                try
+                {
+                    messagesRecycler.smoothScrollToPosition(searchedPosition.get(index));
+                    Log.i("searchFromList","scroll is completed");
+                }
+                catch(Exception e)
+                {
+                    index = index - 1;
+                }
 
             }
         });
@@ -843,9 +842,9 @@ user2.setUserLanguages(hashmap);
         sendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-Log.i("sendmessageClicked","done") ;
+                Log.i("sendmessageClicked","done") ;
                 Log.i("abcdefg","ChatLine312");
-            if(a==0)
+                if(a==0)
                 {
                     if(chatType.equals("personal")) {
                         personalMessage = new PersonalMessage();
@@ -868,7 +867,7 @@ Log.i("sendmessageClicked","done") ;
                         //    setRecyclerAndFirebase(TEXT,IMAGE,CONTACT,FILE,REPLIED);
                         Log.i("abcdefg", "ChatLine334");
                     }else{
-                       //nothing to do all things are already there
+                        //nothing to do all things are already there
 
                     }
                     a=1;
@@ -888,78 +887,78 @@ Log.i("sendmessageClicked","done") ;
 
         }
 
-           childEventListener = new ChildEventListener() {
-               @Override
-               public void onChildAdded(@NonNull final DataSnapshot dataSnapshot, @Nullable String s) {
-                   String starredMessage = null,StatusMessage = "NotSend",PGID = "raj",ContactMessage = null;
-                   Log.i("message is coming", "Yes");
-                   if(dataSnapshot.child("messagesenderUID").getValue(String.class).equals(user2.getUID()))
-                   {
-                         Log.i("MessageComing","My message");
-                   }
-                   else
-                   {
-                      // databaseMessage.deleteDownload("clear is done");for now it is not in use but it is useful
-                       final Message z = new Message();
-                       z.setMessageType(dataSnapshot.child("messageType").getValue(String.class));
-                       z.setMessagesenderUID(dataSnapshot.child("messagesenderUID").getValue(String.class));
-                       z.setMID(dataSnapshot.child("mid").getValue(String.class));
-                       z.setMessageTime(dataSnapshot.child("messageTime").getValue(String.class));
-                       if(z.getMessageType().charAt(1) == '1')
+        childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull final DataSnapshot dataSnapshot, @Nullable String s) {
+                String starredMessage = null,StatusMessage = "NotSend",PGID = "raj",ContactMessage = null;
+                Log.i("message is coming", "Yes");
+                if(dataSnapshot.child("messagesenderUID").getValue(String.class).equals(user2.getUID()))
+                {
+                    Log.i("MessageComing","My message");
+                }
+                else
+                {
+                    // databaseMessage.deleteDownload("clear is done");for now it is not in use but it is useful
+                    final Message z = new Message();
+                    z.setMessageType(dataSnapshot.child("messageType").getValue(String.class));
+                    z.setMessagesenderUID(dataSnapshot.child("messagesenderUID").getValue(String.class));
+                    z.setMID(dataSnapshot.child("mid").getValue(String.class));
+                    z.setMessageTime(dataSnapshot.child("messageTime").getValue(String.class));
+                    if(z.getMessageType().charAt(1) == '1')
+                    {
+                        z.setMessageImageBitmap(null);
+                        z.setMessageImage(dataSnapshot.child("messageImage").getValue(String.class));
+                    }
+                    if(z.getMessageType().charAt(0) == '1') {
+                        z.setMessageText(dataSnapshot.child("messageText").getValue(String.class));
+                    }
+                    if(z.getMessageType().charAt(3)=='1')
+                    {
+                        z.setMessageFileLocalAddress(null);
+                        z.setMessageFile(dataSnapshot.child("messageFile").getValue(String.class));
+                    }
+                    if(z.getMessageType().charAt(2) == '1')
+                    {
+                        HashMap<String, String> databaseHashmap = new HashMap<>();
+                        Iterator<DataSnapshot> items = dataSnapshot.child("messageContact").getChildren().iterator();
+                        while(items.hasNext())
                         {
-                            z.setMessageImageBitmap(null);
-                            z.setMessageImage(dataSnapshot.child("messageImage").getValue(String.class));
+                            DataSnapshot item = items.next();
+                            ContactMessage = ContactMessage  + item.getKey() + "~" + (String) item.getValue() + "~";
+                            databaseHashmap.put(item.getKey(), (String) item.getValue());
                         }
-                       if(z.getMessageType().charAt(0) == '1') {
-                           z.setMessageText(dataSnapshot.child("messageText").getValue(String.class));
-                       }
-                        if(z.getMessageType().charAt(3)=='1')
-                        {
-                            z.setMessageFileLocalAddress(null);
-                            z.setMessageFile(dataSnapshot.child("messageFile").getValue(String.class));
-                        }
-                        if(z.getMessageType().charAt(2) == '1')
-                       {
-                           HashMap<String, String> databaseHashmap = new HashMap<>();
-                           Iterator<DataSnapshot> items = dataSnapshot.child("messageContact").getChildren().iterator();
-                           while(items.hasNext())
-                           {
-                               DataSnapshot item = items.next();
-                               ContactMessage = ContactMessage  + item.getKey() + "~" + (String) item.getValue() + "~";
-                               databaseHashmap.put(item.getKey(), (String) item.getValue());
-                           }
-                           z.setMessageContact(databaseHashmap);
-                       }
-                       messageList.add(z);
-                        Log.i("database","formed");
-                        databaseMessage.insertMessage(z,starredMessage,StatusMessage,ContactMessage,PGID);
-                       recyclerAdapterGroupText1.notifyDataSetChanged();
+                        z.setMessageContact(databaseHashmap);
+                    }
+                    messageList.add(z);
+                    Log.i("database","formed");
+                    databaseMessage.insertMessage(z,starredMessage,StatusMessage,ContactMessage,PGID);
+                    recyclerAdapterGroupText1.notifyDataSetChanged();
 
-                     //  messagesRecycler.smoothScrollToPosition(messagesRecycler.getAdapter().getItemCount());
-                   }
-               }
+                    //  messagesRecycler.smoothScrollToPosition(messagesRecycler.getAdapter().getItemCount());
+                }
+            }
 
-               @Override
-               public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-               }
+            }
 
-               @Override
-               public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-               }
+            }
 
-               @Override
-               public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-               }
+            }
 
-               @Override
-               public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-               }
-           };
-           messageReference.addChildEventListener(childEventListener);
+            }
+        };
+        messageReference.addChildEventListener(childEventListener);
 
 //
 //        if(a==1) {
@@ -980,15 +979,15 @@ Log.i("sendmessageClicked","done") ;
 
             @Override
             public void afterTextChanged(Editable s) {
-              if(messageContent.getText().length()>0)
-              {
-                  sendMessage.setClickable(true);
-                  TEXT = "1";
-              }
-              else
-              {
-                  TEXT = "0";
-              }
+                if(messageContent.getText().length()>0)
+                {
+                    sendMessage.setClickable(true);
+                    TEXT = "1";
+                }
+                else
+                {
+                    TEXT = "0";
+                }
             }
         });
 
@@ -1120,60 +1119,60 @@ Log.i("sendmessageClicked","done") ;
         }
         else
         {
-           if( messageList.get(i).getMessageType().charAt(2) == '1')
-           {
-               replyMessagePic.setVisibility(View.VISIBLE);
-               replyMessagePic.setImageResource(R.drawable.starstarredmessagesicon);
-               replyMessageType.setText("Contact");
-               REPLIED = REPLIED + "C";
-           }
-           else
-           {
-               if(messageList.get(i).getMessageType().charAt(3) == '1')
-               {
-                   int dotPosition = messageList.get(i).getMessageFile().indexOf(".");
-                   replyMessagePic.setVisibility(View.VISIBLE);
-                   replyMessagePic.setImageResource(R.drawable.starstarredmessagesicon);
-                   replyMessageType.setText(messageList.get(i).getMessageFile().substring(dotPosition + 1));
-                   REPLIED = REPLIED + "F";
-                   if(replyMessageType.getText().length() < 10)
-                   {
-                       REPLIED = REPLIED + replyMessageType.getText().toString();
-                       for(int j = 1; j<=10-replyMessageType.getText().length();j++)
-                       {
-                           REPLIED = REPLIED + " ";
-                       }
-                   }
-                   else {
-                       REPLIED = REPLIED + replyMessageType.getText().toString();
-                   }
-               }
-               else
-               {
-                   replyMessagePic.setVisibility(View.GONE);
-                   REPLIED = REPLIED + "T";
-                   if(messageList.get(i).getMessageText().length() > 10) {
-                       replyMessageType.setText(messageList.get(i).getMessageText().substring(0, 10));
-                       REPLIED = REPLIED + messageList.get(i).getMessageText().substring(0, 10);
-                   }
-                   else
-                   {
-                       replyMessageType.setText(messageList.get(i).getMessageText());
-                       REPLIED = REPLIED + replyMessageType.getText().toString();
-                       for(int j =1; j<=10-messageList.get(i).getMessageText().length();j++)
-                       {
-                           REPLIED = REPLIED + " ";
-                       }
-                   }
-               }
-           }
+            if( messageList.get(i).getMessageType().charAt(2) == '1')
+            {
+                replyMessagePic.setVisibility(View.VISIBLE);
+                replyMessagePic.setImageResource(R.drawable.starstarredmessagesicon);
+                replyMessageType.setText("Contact");
+                REPLIED = REPLIED + "C";
+            }
+            else
+            {
+                if(messageList.get(i).getMessageType().charAt(3) == '1')
+                {
+                    int dotPosition = messageList.get(i).getMessageFile().indexOf(".");
+                    replyMessagePic.setVisibility(View.VISIBLE);
+                    replyMessagePic.setImageResource(R.drawable.starstarredmessagesicon);
+                    replyMessageType.setText(messageList.get(i).getMessageFile().substring(dotPosition + 1));
+                    REPLIED = REPLIED + "F";
+                    if(replyMessageType.getText().length() < 10)
+                    {
+                        REPLIED = REPLIED + replyMessageType.getText().toString();
+                        for(int j = 1; j<=10-replyMessageType.getText().length();j++)
+                        {
+                            REPLIED = REPLIED + " ";
+                        }
+                    }
+                    else {
+                        REPLIED = REPLIED + replyMessageType.getText().toString();
+                    }
+                }
+                else
+                {
+                    replyMessagePic.setVisibility(View.GONE);
+                    REPLIED = REPLIED + "T";
+                    if(messageList.get(i).getMessageText().length() > 10) {
+                        replyMessageType.setText(messageList.get(i).getMessageText().substring(0, 10));
+                        REPLIED = REPLIED + messageList.get(i).getMessageText().substring(0, 10);
+                    }
+                    else
+                    {
+                        replyMessageType.setText(messageList.get(i).getMessageText());
+                        REPLIED = REPLIED + replyMessageType.getText().toString();
+                        for(int j =1; j<=10-messageList.get(i).getMessageText().length();j++)
+                        {
+                            REPLIED = REPLIED + " ";
+                        }
+                    }
+                }
+            }
         }
         showReplyMessage.setVisibility(View.VISIBLE);
         REPLIED = REPLIED + messageList.get(i).getMID() + String.valueOf(i);
         Toast.makeText(this,REPLIED,Toast.LENGTH_SHORT).show();
     }
 
-public static Bitmap bitmap2;
+    public static Bitmap bitmap2;
     public static void cameraImageBitmap(Bitmap b)
     {
         IMAGE = "1";
@@ -1192,8 +1191,8 @@ public static Bitmap bitmap2;
     public String getTime()
     {
         Calendar calander = Calendar.getInstance();
-       SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
-       String  time = simpleDateFormat.format(calander.getTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+        String  time = simpleDateFormat.format(calander.getTime());
         return time ;
     }
     public String getPID(String U1Number,String U2Number)
@@ -1210,7 +1209,7 @@ public static Bitmap bitmap2;
             databaseMessage.deleteDownload(clearMessage, 0);
         }
 
-            String starredMessage = null, StatusMessage = "NotSend", PGID, ContactMessage = null;
+        String starredMessage = null, StatusMessage = "NotSend", PGID, ContactMessage = null;
         if (chatType.equals("personal")){
             PGID = personalMessage.getPID();
         }else{
@@ -1226,58 +1225,58 @@ public static Bitmap bitmap2;
         }
 
         Log.i("setRecyclerAndFirebase","called") ;
-                String Type;
-                Type = T + I + C + F + R;
+        String Type;
+        Type = T + I + C + F + R;
 
-                m.setMessagesenderUID(UID);
-                if(T.equals("1"))
-                {
-                    m.setMessageText(messageContent.getText().toString());
-                }
-                m.setMessageTime(getTime());
-                if(chatType.equals("personal")){
-                m.setMID(getMID(personalMessage.getPID()));}
-                else{
-                    m.setMID(getMID(group.getGID()));
-                }
-                if(I.equals("1"))
-                {
-                    m.setMessageImage(timeOfDataSaving + ".jpg");
-                    m.setMessageImageLocalAddress(RealPath);
-                    Log.i("findthepath",imageUri.getPath());
-                    m.setMessageImageBitmap(bitmap);
-                }
-                if(F.equals("1"))
-                {
-                    Log.i("pdfselected","F.equals(1) downloadUrl");
-                    m.setMessageFileLocalAddress(RealPath);
-                  // m.setMessageFile(timeOfDataSaving + ".pdf");this part is done in respectice type of file
-                }
-                if(C.equals("1"))
-                {
-                    m.setMessageContact(messageContactList);
+        m.setMessagesenderUID(UID);
+        if(T.equals("1"))
+        {
+            m.setMessageText(messageContent.getText().toString());
+        }
+        m.setMessageTime(getTime());
+        if(chatType.equals("personal")){
+            m.setMID(getMID(personalMessage.getPID()));}
+        else{
+            m.setMID(getMID(group.getGID()));
+        }
+        if(I.equals("1"))
+        {
+            m.setMessageImage(timeOfDataSaving + ".jpg");
+            m.setMessageImageLocalAddress(RealPath);
+            Log.i("findthepath",imageUri.getPath());
+            m.setMessageImageBitmap(bitmap);
+        }
+        if(F.equals("1"))
+        {
+            Log.i("pdfselected","F.equals(1) downloadUrl");
+            m.setMessageFileLocalAddress(RealPath);
+            // m.setMessageFile(timeOfDataSaving + ".pdf");this part is done in respectice type of file
+        }
+        if(C.equals("1"))
+        {
+            m.setMessageContact(messageContactList);
 
-                    for(HashMap.Entry<String,String> entry : messageContactList.entrySet())
-                    {
-                        ContactMessage = ContactMessage + entry.getKey() + "~" + entry.getValue() + "~";
-                    }
-                }
+            for(HashMap.Entry<String,String> entry : messageContactList.entrySet())
+            {
+                ContactMessage = ContactMessage + entry.getKey() + "~" + entry.getValue() + "~";
+            }
+        }
 
-                m.setMessageType(Type);
-                messageList.add(m);
-                Log.i("numberofobjectsinList", String.valueOf(messageList.size()));
-                // recyclerAdapterGroupText1.updateMessageListItems(messageList);
-                recyclerAdapterGroupText1.notifyDataSetChanged();
+        m.setMessageType(Type);
+        messageList.add(m);
+        Log.i("numberofobjectsinList", String.valueOf(messageList.size()));
+        // recyclerAdapterGroupText1.updateMessageListItems(messageList);
+        recyclerAdapterGroupText1.notifyDataSetChanged();
 
 
-       // messagesRecycler.smoothScrollToPosition(messagesRecycler.getAdapter().getItemCount());
+        // messagesRecycler.smoothScrollToPosition(messagesRecycler.getAdapter().getItemCount());
 
-                messageContent.setText("");
-                sendMessage.setClickable(false);
-                IMAGE = "0";
-                TEXT = "0";
-                CONTACT = "0";
-                FILE = "0";
+        messageContent.setText("");
+        sendMessage.setClickable(false);
+        IMAGE = "0";
+        TEXT = "0";
+        CONTACT = "0";
+        FILE = "0";
 
         replyMessagePic.setVisibility(View.GONE);
         showReplyMessage.setVisibility(View.GONE);
@@ -1285,11 +1284,11 @@ public static Bitmap bitmap2;
         replyMessageType.setText(null);
         replyMessageView.setBackgroundColor(Color.parseColor("#00000000"));
         REPLIED = "0";
-                TypeDay="N";
-                RESULT_LOAD_IMAGE = 0;
-                RESULT_LOAD_DOCUMENT = 0;
-                Log.i("numberofitems", String.valueOf(recyclerAdapterGroupText1.getItemCount()));
-                settingFirebase(T,I,C,F,R,m);
+        TypeDay="N";
+        RESULT_LOAD_IMAGE = 0;
+        RESULT_LOAD_DOCUMENT = 0;
+        Log.i("numberofitems", String.valueOf(recyclerAdapterGroupText1.getItemCount()));
+        settingFirebase(T,I,C,F,R,m);
     }
     public void settingFirebase(String T,String I,String C,String F,String R,Message m)
     {
@@ -1370,7 +1369,7 @@ public static Bitmap bitmap2;
         if(C.equals("1"))
         {
             if (chatType.equals("personal")){
-            FirebaseDatabase.getInstance().getReference().child("personalMessage").child(personalMessage.getPID()).child("messages").child(m.getMID()).child("messageContact").setValue(messageContactList);
+                FirebaseDatabase.getInstance().getReference().child("personalMessage").child(personalMessage.getPID()).child("messages").child(m.getMID()).child("messageContact").setValue(messageContactList);
             }else{
                 FirebaseDatabase.getInstance().getReference().child("groups").child(group.getGID()).child("messages").child(m.getMID()).child("messageContact").setValue(messageContactList);
 
@@ -1394,7 +1393,7 @@ public static Bitmap bitmap2;
         {
             m.setMessageTime(getTime());
             if(chatType.equals("personal")){
-            m.setMID(personalMessage.getPID());}
+                m.setMID(personalMessage.getPID());}
             else{
                 m.setMID(group.getGID());
             }
