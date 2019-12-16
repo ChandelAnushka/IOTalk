@@ -2,6 +2,7 @@ package in.codepredators.delta.Classes;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import in.codepredators.delta.Activities.Chat;
@@ -23,48 +25,38 @@ import in.codepredators.delta.Activities.NewGroupFormation;
 import in.codepredators.delta.R;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static in.codepredators.delta.Activities.ChatList.layoutVisible;
+
 
 
 public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapterChatList.ViewHolderChatScreen> {
-    private List<User> userList;
+    private List<ChatList.ChatListItem> userList;
     private  Context context;
-
+    int a = 0;
 
     public class ViewHolderChatScreen extends RecyclerView.ViewHolder {
-        public TextView textViewTimeOfMessage;
+        public TextView messageTime;
         public TextView chatListName;
-        public View chatListProfilePic;
         public ImageView imageViewAttachIcon;
-        public TextView textViewNoOfUnseenMessages;
-        public View profilePic;
-
-
-
+        public TextView noOfUnseenMessage;
+        public LinearLayout backgroundColor;
 
 
         public ViewHolderChatScreen(@NonNull View itemView) {
             super(itemView);
-
-            textViewTimeOfMessage = itemView.findViewById(R.id.textViewTimeOfMessage);
+            messageTime = itemView.findViewById(R.id.textViewTimeOfMessage);
             chatListName = itemView.findViewById(R.id.chatListName);
-            chatListProfilePic = itemView.findViewById(R.id.chatListProfilePic);
             imageViewAttachIcon = itemView.findViewById(R.id.imageViewAttachIcon);
-            textViewNoOfUnseenMessages = itemView.findViewById(R.id.textViewNoOfUnseenMessages);
-            profilePic=itemView.findViewById(R.id.chatListProfilePic);
+            noOfUnseenMessage = itemView.findViewById(R.id.textViewNoOfUnseenMessages);
+            backgroundColor = itemView.findViewById(R.id.chatListLinearLayout1);
 
         }
     }
-    public RecyclerAdapterChatList(Context context ,List<User> userList)
+    public RecyclerAdapterChatList(Context context ,List<ChatList.ChatListItem> userList)
     {
-        this.context=context;
+        this.context = context;
         this.userList = userList;
     }
-    public void updateList(List<User> updatedList)
-    {
-        userList = updatedList;
-        notifyDataSetChanged();
-    }
+
     public ViewGroup viewGroup1;
     @NonNull
     @Override
@@ -76,68 +68,49 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolderChatScreen viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolderChatScreen viewHolder, final int i) {
+        ChatList.ChatListItem chatListItem = userList.get(i);
+        viewHolder.chatListName.setText(chatListItem.getUser().getUserName());
+        viewHolder.messageTime.setText(chatListItem.getMessage().getMessageTime());
+        Log.i("user name",chatListItem.getUser().getUserName());
+        Log.i("message time" +
+                "",chatListItem.getMessage().getMessageTime());
 
-        viewHolder.profilePic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                loadPhoto();
-
-            }
-        });
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String messagesenderUID = "getMessagesenderUID()";
-                ((ChatList)context).openChat(messagesenderUID);
-
-            }
-        });
         viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-
-                layoutVisible();
-
-
+                ColorDrawable viewColor = (ColorDrawable) viewHolder.backgroundColor.getBackground();
+                int colorId = viewColor.getColor();
+                if (colorId != Color.parseColor("#1af0ff")) {
+                    a++;
+                    ChatList.selectedChat(userList.get(i),a);
+                    viewHolder.backgroundColor.setBackgroundColor(Color.parseColor("#1af0ff"));
+                }
+                //Toast.makeText(getContext(), "long Click" + position+"  ", Toast.LENGTH_SHORT).show();
                 return true;
-            }}
-        );
+            }
+        });
 
-
-
-
-        User user = userList.get(i);
-        viewHolder.chatListName.setText(user.getUserName());
-//        viewHolder.textViewTimeOfMessage.setText(user.getTextViewTimeOfMessage());
-
-//        viewHolder.textViewNoOfUnseenMessages.setText(user.getTextViewNoOfUnseenMessages());
-
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (a > 0) {
+                    ColorDrawable viewColor = (ColorDrawable) viewHolder.backgroundColor.getBackground();
+                    int colorId = viewColor.getColor();
+                    if (colorId == Color.parseColor("#1af0ff")) {
+                        a--;
+                        viewHolder.backgroundColor.setBackgroundColor(Color.parseColor("#00000000"));
+                    } else {
+                        a++;
+                        viewHolder.backgroundColor.setBackgroundColor(Color.parseColor("#1af0ff"));
+                    }
+                    ChatList.selectedChat(userList.get(i), a);
+            }
+        }
+    });
     }
-
     @Override
     public int getItemCount() {
-//        return 1;
         return userList.size();
     }
-    private void loadPhoto()
-    {
-
-        final Dialog dialog = new Dialog(context);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(LAYOUT_INFLATER_SERVICE);
-        View layout = (View) inflater.inflate(R.layout.profilepicture_popup,viewGroup1,false);
-        ImageView image = (ImageView) layout.findViewById(R.id.viewProfilePicPopup1);
-        image.requestLayout();
-        dialog.setContentView(layout);
-        dialog.show();
-
-    }
-
-
-
 }
-
