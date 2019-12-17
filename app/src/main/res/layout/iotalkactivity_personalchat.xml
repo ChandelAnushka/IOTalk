@@ -9,26 +9,6 @@
     android:background="#FFFFFF">
 
 
-    <ImageView
-        android:id="@+id/imageChatBackground"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/chatTextView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|top"
-        android:text="TextView"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <RelativeLayout
         android:id="@+id/linearLayout1ChatActivity"
         android:layout_width="match_parent"
@@ -243,6 +223,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/uparrow"
+
                 android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@id/editTextSearchChatScreen"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -255,7 +236,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/downarrow"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@id/uparrow"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -414,7 +395,7 @@
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
 
                 android:layout_marginEnd="10dp"
                 app:layout_constraintTop_toTopOf="parent"
