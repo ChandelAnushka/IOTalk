@@ -22,14 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/StarredMessagesLinearLayout2"
@@ -45,87 +42,77 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
-            <ImageView
+        <ImageView
                 android:id="@+id/StarredMessagesProfilePic"
-                android:layout_width="49dp"
-                android:layout_height="49dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/roundprofilepiccontact"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/roundprofilepiccontact"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.005"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-
-            <TextView
-                android:id="@+id/StarredMessagesMessageSender"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/chivoregular"
-                android:gravity="left"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:text="Senderkkkkkkkk"
-                android:textColor="#000000"
-                android:textSize="20sp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="60dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/StarredMessagesProfilePic"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="20dp">
+
+                <TextView
+                    android:id="@+id/StarredMessagesMessageSender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/chivoregular"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Shhhhhhhhh"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/imageViewArrowStarredMessages"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_weight="1"
-              app:layout_constraintStart_toEndOf="@id/StarredMessagesMessageSender"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignRight="@+id/StarredMessagesMessageSender"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/rightarrowicon" />
+                app:srcCompat="@drawable/rightarrowicon"/>
 
-            <TextView
-                android:id="@+id/StarredMessagesMessageReceiver"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/chivoregular"
-                android:text="Recieverjjjjjjjj"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="20sp"
-              app:layout_constraintStart_toEndOf="@id/imageViewArrowStarredMessages"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/StarredMessagesLinearLayout3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                app:layout_constraintStart_toEndOf="@id/StarredMessagesMessageReceiver"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/StarredMessagesDatetextView"
+                    android:id="@+id/StarredMessagesMessageReceiver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="30dp"
                     android:layout_weight="1"
+                    android:ellipsize="end"
                     android:fontFamily="@font/chivoregular"
-                    android:text="12/07/2000"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Rejjjjjjjjjjjjjjjjjjjjjjjjjjjjjj"
                     android:textColor="#000000"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
+
+
+
+
+
 
                 <ImageView
                     android:id="@+id/StarredMessagesForwardimageView"
                     android:layout_width="10dp"
                     android:layout_height="18dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/forwardarrowicon" />
@@ -148,15 +135,14 @@
             <TextView
                 android:id="@+id/StarredMessagesMessagetextView"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:ellipsize="end"
-                android:maxLines="5"
                 android:layout_marginBottom="10dp"
+                android:ellipsize="end"
                 android:fontFamily="@font/chivoregular"
                 android:text="Multiple line messages here! Multiple line messages here!Multiple line messages here!Multiple line messages here!Multiple line messages here!Multiple line messages here!Multiple line messages here!Multiple line messages here!Multiple line messages here!Multiple line messages here!Multiple line messages here!Multiple line messages here! "
                 android:textColor="#000000"
@@ -166,13 +152,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:id="@+id/StarredMessagesLinearLayout5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/StarredMessagesMessagetextView">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="0.2"
+                    android:fontFamily="@font/chivoregular"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="more..."
+                    android:textColor="#C1A0EE"
+                    android:textSize="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/StarredMessagesStarimageView"
@@ -180,25 +183,25 @@
                     android:layout_height="19dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
+                    android:layout_marginTop="6dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/StarredMessagesTimetextView"
-                    app:srcCompat="@drawable/star" />
+                    app:layout_constraintEnd_toStartOf="@id/StarredMessagesTimetextView" />
+
 
                 <TextView
                     android:id="@+id/StarredMessagesTimetextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/chivoregular"
                     android:text="Time"
+                    android:layout_marginTop="6dp"
                     android:textColor="#000000"
-                    android:textSize="13sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:textSize="13sp"/>
+
+
+
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
