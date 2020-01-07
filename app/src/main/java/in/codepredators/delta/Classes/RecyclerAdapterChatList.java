@@ -38,7 +38,7 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
         public TextView chatListName;
         public ImageView imageViewAttachIcon;
         public TextView noOfUnseenMessage;
-        public LinearLayout backgroundColor;
+        public ConstraintLayout backgroundColor;
 
 
         public ViewHolderChatScreen(@NonNull View itemView) {

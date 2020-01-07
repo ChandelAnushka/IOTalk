@@ -1,6 +1,7 @@
 package in.codepredators.delta.Classes;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,16 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import in.codepredators.delta.Activities.Chat;
+import in.codepredators.delta.Activities.ChatList;
 import in.codepredators.delta.R;
 
 
 public class RecyclerAdapterArchiveList extends RecyclerView.Adapter<RecyclerAdapterArchiveList.ViewHolderArchive> {
     private List<User> userList;
+    private List<ChatList.ChatListItem> chatListItemList;
+
     private Context context;
 
 
@@ -45,10 +51,12 @@ public class RecyclerAdapterArchiveList extends RecyclerView.Adapter<RecyclerAda
 
         }
     }
-    public RecyclerAdapterArchiveList(Context context , List<User> userList) {
+    public RecyclerAdapterArchiveList(Context context , List<ChatList.ChatListItem> chatListItemList) {
 
-        this.context= context;
-        this.userList = userList;
+        this.context = context;
+        this.chatListItemList = chatListItemList;
+
+        Log.i("checkingsizerecycler", String.valueOf(chatListItemList.size()));
     }
     @NonNull
     @Override
@@ -61,15 +69,40 @@ public class RecyclerAdapterArchiveList extends RecyclerView.Adapter<RecyclerAda
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderArchive viewHolder, int i) {
-        User user = userList.get(i);
-        viewHolder. chatListName.setText(user.getUserName());
+        ChatList.ChatListItem c=chatListItemList.get(i);
+
+        Log.i("checkingsizeonbind", String.valueOf(chatListItemList.size()));
+        viewHolder.chatListName.setText(c.getUser().getUserName());
+        if(Integer.parseInt(c.getNoOfUnseenMessage())>=1) {
+            viewHolder.textViewNoOfUnseenMessages.setVisibility(View.VISIBLE);
+            viewHolder.textViewNoOfUnseenMessages.setText(c.getNoOfUnseenMessage());
+        }else{
+            viewHolder.textViewNoOfUnseenMessages.setVisibility(View.INVISIBLE);
+        }
+        viewHolder.textViewTimeOfMessage.setText(c.getMessage().getMessageTime());
+        if (c.getPinStatus())
+        {
+            viewHolder.imageViewAttachIcon.setVisibility(View.VISIBLE);
+        }else{
+
+            viewHolder.imageViewAttachIcon.setVisibility(View.INVISIBLE);
+        }
+
+       // viewHolder.chatListName.setText(chatListItemList.);
+      /** ChatList c= listname.get(i);
+        c.getUser().getUserName();
+        c.getNoOfUnseenMessage();**/
+
+
+
+       // viewHolder. chatListName.setText(user.getUserName());
 
     }
 
     @Override
     public int getItemCount() {
 
-        return 1;
+        return chatListItemList.size();
 //        return userList.size();
     }
 

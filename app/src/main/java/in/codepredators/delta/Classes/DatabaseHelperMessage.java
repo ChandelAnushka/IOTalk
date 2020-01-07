@@ -81,21 +81,21 @@ public class DatabaseHelperMessage extends SQLiteOpenHelper {
 //            Cursor cursor = DB.query(DatabaseHelperMessage.MessagesTable, null, WHERE, new String[]{message.getMID()}, null, null, null);
             File file;
             if(message.getMessageType().charAt(1) == '1') {
-              file = new File(message.getMessageImageLocalAddress(), message.getMessageImage());
-           }
-           else {
+                file = new File(message.getMessageImageLocalAddress(), message.getMessageImage());
+            }
+            else {
                 file = new File(message.getMessageFileLocalAddress(), message.getMessageFile());
             }if(file.exists()) {
             boolean ans = file.delete();
             Log.i("clearChat", String.valueOf(ans));
         }
         }
-            DB.delete(MessagesTable, colDatabaseMessageID + " = ?",
-                    new String[]{String.valueOf(message.getMID())});
+        DB.delete(MessagesTable, colDatabaseMessageID + " = ?",
+                new String[]{String.valueOf(message.getMID())});
 
         DB.close();
     }
-    public List<Message> getAllMessages() {
+    public List<Message> getAllMessages(String type) {
 
         List<Message> messages = new ArrayList<>();
 
@@ -105,38 +105,38 @@ public class DatabaseHelperMessage extends SQLiteOpenHelper {
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery(selectQuery, null);
 
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst()){
             do
-                {
-                Message message = new Message();
+            {
+                if(type.equals("all")   ||  (type.equals("starred") && cursor.getString(cursor.getColumnIndex(colDatabaseMessageStarred)).equals("true"))   ) {
+                    Message message = new Message();
                     message.setMessageFileLocalAddress(cursor.getString(cursor.getColumnIndex(colDatabaseMessageFileLocalAddress)));
-                  //  Log.i("DatabaseFileAddress",message.getMessageFileLocalAddress());
+                    //  Log.i("DatabaseFileAddress",message.getMessageFileLocalAddress());
                     message.setMessageImageLocalAddress(cursor.getString(cursor.getColumnIndex(colDatabaseMessageImageLocalAddress)));
-                  //  Log.i("Databsase",message.getMessageImageLocalAddress());
-                message.setMessagesenderUID(cursor.getString(cursor.getColumnIndex(colDatabaseMessagesenderUID)));
-                message.setMessageStarredStatus(cursor.getString(cursor.getColumnIndex(colDatabaseMessageStarred)));
-                message.setMessageStatus(cursor.getString(cursor.getColumnIndex(colDatabaseMessageStatus)));
-                message.setMessageText(cursor.getString(cursor.getColumnIndex(colDatabaseMessageText)));
-                message.setMessageTime(cursor.getString(cursor.getColumnIndex(colDatabaseMessageTime)));
-                message.setMessageFile(cursor.getString(cursor.getColumnIndex(colDatabaseMessageFileFirebaseReference)));
-                message.setMessageImage(cursor.getString(cursor.getColumnIndex(colDatabaseMessageImageFirebaseReference)));
-                String Type = cursor.getString(cursor.getColumnIndex(colDatabaseMessageType));
-                message.setMessageType(Type.substring(1));
-                message.setMID(cursor.getString(cursor.getColumnIndex(colDatabaseMessageID)));
-                HashMap<String,String> contactHashmap = new HashMap<>();
-                if(message.getMessageType().charAt(2) == '1')
-                {
-                    String contact = cursor.getString(cursor.getColumnIndex(colDatabaseMessageContact)).substring(4);//null is saved in starting position after it is improved u have to remove this
-                    String[] splited = contact.split("~");
-                    //create a hashmap
-                    for(int i = 0; i<splited.length - 1; i++)
-                    {
-                        contactHashmap.put(splited[i],splited[i+1]);
-                        i++;
+                    //  Log.i("Databsase",message.getMessageImageLocalAddress());
+                    message.setMessagesenderUID(cursor.getString(cursor.getColumnIndex(colDatabaseMessagesenderUID)));
+                    message.setMessageStarredStatus(cursor.getString(cursor.getColumnIndex(colDatabaseMessageStarred)));
+                    message.setMessageStatus(cursor.getString(cursor.getColumnIndex(colDatabaseMessageStatus)));
+                    message.setMessageText(cursor.getString(cursor.getColumnIndex(colDatabaseMessageText)));
+                    message.setMessageTime(cursor.getString(cursor.getColumnIndex(colDatabaseMessageTime)));
+                    message.setMessageFile(cursor.getString(cursor.getColumnIndex(colDatabaseMessageFileFirebaseReference)));
+                    message.setMessageImage(cursor.getString(cursor.getColumnIndex(colDatabaseMessageImageFirebaseReference)));
+                    String Type = cursor.getString(cursor.getColumnIndex(colDatabaseMessageType));
+                    message.setMessageType(Type.substring(1));
+                    message.setMID(cursor.getString(cursor.getColumnIndex(colDatabaseMessageID)));
+                    HashMap<String, String> contactHashmap = new HashMap<>();
+                    if (message.getMessageType().charAt(2) == '1') {
+                        String contact = cursor.getString(cursor.getColumnIndex(colDatabaseMessageContact)).substring(4);//null is saved in starting position after it is improved u have to remove this
+                        String[] splited = contact.split("~");
+                        //create a hashmap
+                        for (int i = 0; i < splited.length - 1; i++) {
+                            contactHashmap.put(splited[i], splited[i + 1]);
+                            i++;
+                        }
+                        message.setMessageContact(contactHashmap);
                     }
-                    message.setMessageContact(contactHashmap);
+                    messages.add(message);
                 }
-                messages.add(message);
             }
             while (cursor.moveToNext());
         }
@@ -148,8 +148,8 @@ public class DatabaseHelperMessage extends SQLiteOpenHelper {
     }
     public void updateMessageImageAddress(String MID, String address) {
         Log.i("Databaseupdate",MID + address);
-      SQLiteDatabase DB = this.getWritableDatabase();
-      ContentValues cvUpdate = new ContentValues();
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues cvUpdate = new ContentValues();
         cvUpdate.put(colDatabaseMessageImageLocalAddress,address);
         DB.update(DatabaseHelperMessage.MessagesTable, cvUpdate,
                 "MessageID" + " =?" , new String[]{MID});
@@ -163,7 +163,7 @@ public class DatabaseHelperMessage extends SQLiteOpenHelper {
         DB.update(DatabaseHelperMessage.MessagesTable, cvUpdate,
                 "MessageID" + " =?" , new String[]{MID});
     }
-    public void updateMessageStarredstatus(String MID, String Status) //staus - true or false
+    public void updateMessageStarredstatus(String MID, String Status) //status - true or false
     {
         Log.i("starresstatuschanging",MID + " " + Status);
         SQLiteDatabase DB = this.getWritableDatabase();

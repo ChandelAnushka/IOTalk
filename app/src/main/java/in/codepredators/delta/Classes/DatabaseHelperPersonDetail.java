@@ -2,24 +2,36 @@ package in.codepredators.delta.Classes;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.icu.text.IDNA;
+import android.util.Log;
 
-import androidx.annotation.Nullable;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import in.codepredators.delta.Activities.ChatList;
 
 public class DatabaseHelperPersonDetail extends SQLiteOpenHelper {
     private static final String dbName="IOTalkPersonDetail";
-    public static final String ChatTable="PersonTable";
+    public static final String UserTable="UserTable";
+    public static final String PersonalChatTable = "PersonalTable";
+    public static final String GroupChatTable = "GroupTable";
     public String colDatabaseID = "ID";
-    public String colDatabaseParticipant = "Participant";//UID of user
+    public String colDatabaseParticipant = "Participant";//UID of users in group and personal
     public String colDatabaseName = "Name";
     public String colDatabaseDescription = "Discription";
     public String colDatabaseCountry = "Country";
     public String colDatabaseTime_Creator = "Time_Creator";//creating time and creator id
     public String colDatabaseImage = "Image";//User and image - image //Personal - id of opposite user
     public String colDatabaseLanguage = "Language";
-    public String colDatabseArchievePinChat = "ArchievePinChat";
+    public String colDatabaseArchievePinChat = "ArchievePinChat";
     public String colDatabaseAdmin = "Admin";
+    public String colDatabaseUnseenMessage = "UnseenMessage";
+    public String colDatabaseLastMessageId = "LastMessageId";
+
     public DatabaseHelperPersonDetail(Context context)
     {
         super(context,dbName,null,33);
@@ -27,10 +39,17 @@ public class DatabaseHelperPersonDetail extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("Create table if not exists " + ChatTable + "(" + colDatabaseID + " String, " + colDatabaseAdmin + " String, "
-                + colDatabaseCountry + " String, " + colDatabseArchievePinChat + " String, " + colDatabaseTime_Creator + " String, "
-                + colDatabaseParticipant  + " String, " + colDatabaseName + " String, " + colDatabaseLanguage + " String, " +
+        db.execSQL("Create table if not exists " + UserTable + "(" + colDatabaseID + " String, " + colDatabaseCountry + " String, "
+                + colDatabaseName + " String, " + colDatabaseLanguage + " String, " +
                 colDatabaseImage + " String, " + colDatabaseDescription + " String " + ");");
+        db.execSQL("Create table if not exists " + PersonalChatTable + "(" + colDatabaseID + " String, "
+                + colDatabaseArchievePinChat + " String, " + colDatabaseTime_Creator + " String, "
+                + colDatabaseParticipant  + " String, " + colDatabaseUnseenMessage + " String, " + colDatabaseLastMessageId + " String " + ");");
+        db.execSQL("Create table if not exists " + GroupChatTable + "(" + colDatabaseID + " String, " + colDatabaseAdmin + " String, "
+                + colDatabaseArchievePinChat + " String, " + colDatabaseTime_Creator + " String, "
+                + colDatabaseParticipant  + " String, " + colDatabaseImage + " String, " + colDatabaseDescription + " String, "
+                + colDatabaseUnseenMessage + "String, " + colDatabaseLastMessageId + "String " + ");");
+
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -40,6 +59,7 @@ public class DatabaseHelperPersonDetail extends SQLiteOpenHelper {
     // in chat list the image will come from database
     // when user tap on image than it will download from firebase and it will update database image
     //and same work will be done when personal chat is open by user
+
     public long insertUserDetail(User user,String Image,String language)
     {
         SQLiteDatabase DB = this.getWritableDatabase();
@@ -50,21 +70,20 @@ public class DatabaseHelperPersonDetail extends SQLiteOpenHelper {
         values.put(colDatabaseTime_Creator,user.getUserTime());
         values.put(colDatabaseImage,Image);
         values.put(colDatabaseLanguage,language);
-        long ID = DB.insert(ChatTable, null, values);
+        long ID = DB.insert(UserTable, null, values);
         DB.close();
         return ID;
     }
-    public long insertPersonalChatDetail(PersonalMessage personalMessage, String Image, String Time,String description)
+    public long insertPersonalChatDetail(PersonalMessage personalMessage, String Time,String MessageId)
     {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(colDatabaseID,personalMessage.getPID());
         values.put(colDatabaseParticipant,personalMessage.getPersonalUserOne() + "|" + personalMessage.getPersonalUserTwo());
-        values.put(colDatabaseImage,Image);
         values.put(colDatabaseTime_Creator,Time);
-        values.put(colDatabseArchievePinChat,"false");
-        values.put(colDatabaseDescription,description);
-        long ID = DB.insert(ChatTable,null,values);
+        values.put(colDatabaseArchievePinChat,"false|false");
+        values.put(colDatabaseLastMessageId,MessageId);
+        long ID = DB.insert(PersonalChatTable,null,values);
         DB.close();
         return ID;
     }
@@ -73,5 +92,114 @@ public class DatabaseHelperPersonDetail extends SQLiteOpenHelper {
         //these is remaining
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+    }
+    public User getUserByUID(String UID){
+        User user = new User();
+        SQLiteDatabase DB = this.getWritableDatabase();
+
+
+
+        Cursor cursor =  DB.rawQuery( "select * from UserTable where id="+ UID +"", null );
+
+      if(cursor.moveToFirst()){
+            do {
+                //  personalMessage.setPID(cursor.getString(cursor.getColumnIndex(colDatabaseID)));
+            }while (cursor.moveToNext());
+        }
+
+
+        DB.close();
+        cursor.close();
+        return user;
+    }
+    public List<ChatList.ChatListItem> getAllChatList() {
+
+        List<ChatList.ChatListItem> chatListItemsList = new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + PersonalChatTable + " ORDER BY " +
+                colDatabaseID + " DESC";
+
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do
+            {
+                ChatList.ChatListItem  chatListItem = new ChatList.ChatListItem();
+                PersonalMessage personalMessage = new PersonalMessage();
+                personalMessage.setPID(cursor.getString(cursor.getColumnIndex(colDatabaseID)));
+                String usersID[] = cursor.getString(cursor.getColumnIndex(colDatabaseParticipant)).split("|",2);
+                personalMessage.setPersonalUserOne(usersID[0]);
+                personalMessage.setPersonalUserTwo(usersID[1]);
+                chatListItem.setPersonalMessage(personalMessage);
+                String archievepinstatus[] = cursor.getString(cursor.getColumnIndex(colDatabaseArchievePinChat)).split("|",2);
+                if (archievepinstatus[1].equals("true"))
+                    chatListItem.setPinStatus(true);
+                else
+                    chatListItem.setPinStatus(false);
+                if(archievepinstatus[0].equals("false"))
+                    chatListItem.setArchive(false);
+                else
+                    chatListItem.setArchive(true);
+                User user = new User();
+                if(usersID[0].equals(ChatList.UID))
+                    user = getUserByUID(usersID[1]);
+                else
+                    user = getUserByUID(usersID[0]);
+                chatListItem.setUser(user);
+                chatListItemsList.add(chatListItem);
+            }
+            while (cursor.moveToNext());
+        }
+
+        DB.close();
+
+        cursor.close();
+        selectQuery = "SELECT  * FROM " + GroupChatTable + " ORDER BY " +
+                colDatabaseID + " DESC";
+        DB = this.getWritableDatabase();
+        cursor = DB.rawQuery(selectQuery, null);
+
+
+        if (cursor.moveToFirst()) {
+            do
+            {
+                ChatList.ChatListItem  chatListItem = new ChatList.ChatListItem();
+                chatListItemsList.add(chatListItem);
+            }
+            while (cursor.moveToNext());
+        }
+
+        DB.close();
+
+        cursor.close();
+        return chatListItemsList;
+    }
+    public void updateUserDetails( User user)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues cvUpdate = new ContentValues();
+
+        DB.update(UserTable, cvUpdate, colDatabaseID + " = ?",
+                new String[] { String.valueOf(user.getUID()) });
+
+    }
+    public void updatePersonalChatDetails( User user)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues cvUpdate = new ContentValues();
+
+        DB.update(PersonalChatTable, cvUpdate, colDatabaseID + " = ?",
+                new String[] { String.valueOf(user.getUID()) });
+
+    }
+    public void updateGroupChatDetails( User user)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues cvUpdate = new ContentValues();
+
+        DB.update(GroupChatTable, cvUpdate, colDatabaseID + " = ?",
+                new String[] { String.valueOf(user.getUID()) });
+
     }
 }

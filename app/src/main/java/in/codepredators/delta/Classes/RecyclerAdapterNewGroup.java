@@ -50,14 +50,17 @@ public class RecyclerAdapterNewGroup extends RecyclerView.Adapter<RecyclerAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderGroup viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull final ViewHolderGroup viewHolder, final int i) {
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NewGroupFormation.numberValue(groupmembersList.get(i));
                 Log.i("item clicked","yes");
+                viewHolder.newGroupMemberName.setMaxLines(12);
             }
         });
+
+
 
         User groupmembers = groupmembersList.get(i);
         viewHolder.newGroupMemberName.setText(groupmembers.getUserName());

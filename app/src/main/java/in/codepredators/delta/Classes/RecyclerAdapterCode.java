@@ -1,22 +1,30 @@
 package in.codepredators.delta.Classes;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import in.codepredators.delta.R;
 
 
 public class RecyclerAdapterCode extends RecyclerView.Adapter<RecyclerAdapterCode.ViewHolderCode> {
-    private List<User> userList;
+
+    private List<Message> messageList;
     private Context context;
 
 
@@ -27,6 +35,7 @@ public class RecyclerAdapterCode extends RecyclerView.Adapter<RecyclerAdapterCod
         public ImageView codeArrowimageView;
         public TextView codeMessagetextView;
         public TextView codeTimeOfMessagetextView;
+        public TextView textView9;
 
 
 
@@ -38,14 +47,15 @@ public class RecyclerAdapterCode extends RecyclerView.Adapter<RecyclerAdapterCod
             codeProfilePic = itemView.findViewById(R.id.codeProfilePic);
             codeMessageReceiver = itemView.findViewById(R.id.StarredMessagesMessageReceiver);
             codeMessagetextView = itemView.findViewById(R.id.codeMessagetextView);
-            codeTimeOfMessagetextView = itemView.findViewById(R.id.codeTimeOfMessagetextView);;
+            codeTimeOfMessagetextView = itemView.findViewById(R.id.codeTimeOfMessagetextView);
+            textView9=itemView.findViewById(R.id.textView9);
 
         }
     }
-    public RecyclerAdapterCode(Context context  , List<User> userList) {
+    public RecyclerAdapterCode(Context context  ,  List<Message> messageList) {
 
         this.context = context;
-        this.userList = userList;
+        this.messageList= messageList;
     }
     @NonNull
     @Override
@@ -54,26 +64,53 @@ public class RecyclerAdapterCode extends RecyclerView.Adapter<RecyclerAdapterCod
         return new ViewHolderCode(view);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolderCode viewHolder, int i) {
-        User user = userList.get(i);
-//        viewHolder. codeMessageSender.setText(user.getcodeMessageSender());
-//        viewHolder.codeMessageReceiver.setText(user.getcodeMessageReceiver());
-////        viewHolder.codeMessagetextView.setText(user.getUserCode()); //doubt how to get 1st string element from hashmap of UserCode
-//        viewHolder.codeTimeOfMessagetextView.setText(user.getcodeTimeOfMessagetextView());
 
-    }
+
+    @Override
+    public void onBindViewHolder(@NonNull final ViewHolderCode viewHolder, int i) { ;
+        Message message = messageList.get(i);
+
+        viewHolder.codeMessageSender.setText(message.getMessagesenderUID());
+        if(message.getMessageType().charAt(0)=='1') {
+            viewHolder.codeMessagetextView.setText(message.getMessageText());
+        }
+        if(message.getMessageType().charAt(1)=='1'){
+            viewHolder.codeMessagetextView.setText(message.getMessageImage());
+        }
+        if(message.getMessageType().charAt(2)=='1'){
+            viewHolder.codeMessagetextView.setText(message.getMessageFile());
+        }
+
+        viewHolder.codeTimeOfMessagetextView.setText(message.getMessageTime());
+
+
+        viewHolder.textView9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("more clicked","Entered in click");
+                if(viewHolder.textView9.getText().equals("more...")){
+                    viewHolder.codeMessagetextView.setMaxLines(200);
+
+                    Log.i("more clicked","Entered in if click");
+                    viewHolder.textView9.setText("less");
+                }else{
+                    viewHolder.codeMessagetextView.setMaxLines(5);
+
+                    Log.i("more clicked","Entered in else click");
+                    viewHolder.textView9.setText("more...");
+                }
+            }
+        });
+        }
 
     @Override
     public int getItemCount() {
-return 1;
-//        return userList.size();
+   return messageList.size();
     }
-    public void updateList(List<User> updatedList)
+    public void updateList(List<Message> updatedList)
     {
-        userList = updatedList;
+        messageList = updatedList;
         notifyDataSetChanged();
     }
-
 }
 
