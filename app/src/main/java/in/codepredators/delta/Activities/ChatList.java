@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -79,7 +80,8 @@ public class ChatList extends AppCompatActivity {
     List<ChatListItem> chatList;
     DatabaseHelperPersonDetail databaseHelperPersonDetail;
     FloatingActionButton floatingActionButton;
-    public static LinearLayout linearLayout , linearLayout2 ;
+    public static LinearLayout linearLayout;
+    public static ConstraintLayout linearLayout2 ;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
