@@ -63,23 +63,26 @@
                 android:layout_alignEnd="@+id/chatListProfilePic"
                 android:layout_alignBottom="@+id/chatListProfilePic"
                 android:layout_marginTop="0dp"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:srcCompat="@drawable/purplecheckbox" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/chatListName"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:ellipsize="end"
-            android:maxLines="1"
-            android:singleLine="true"
             android:fontFamily="@font/chivoregular"
             android:gravity="left"
+            android:layout_marginEnd="80dp"
+            android:layout_marginStart="60dp"
+            android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@id/chatListLinearLayout4"
+            android:singleLine="true"
             android:text="Contact Name Contact Name Contact Name Contact Name"
             android:textColor="#000000"
-            android:textSize="20dp"
+            android:textSize="16dp"
             app:layout_constraintStart_toEndOf="@id/chatListLinearLayout5"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,8 +106,9 @@
 
                 <ImageView
                     android:id="@+id/imageViewAttachIcon"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
+                    android:layout_width="24dp"
+                    android:visibility="visible"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
                     app:srcCompat="@drawable/pinicon" />
 
@@ -115,10 +119,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="2dp"
+                    android:layout_gravity="end"
                     android:background="@drawable/roundunseenmessagesbackground"
                     android:fontFamily="@font/chivoregular"
                     android:gravity="center"
                     android:text="10"
+                    android:textSize="12dp"
                     android:padding="5dp"
                     android:textColor="#000000" />
 
@@ -128,12 +134,12 @@
                 android:id="@+id/textViewTimeOfMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/chivoregular"
                 android:gravity="right"
                 android:text="33:55555"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chatListLinearLayout3" />
         </androidx.constraintlayout.widget.ConstraintLayout>

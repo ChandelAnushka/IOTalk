@@ -56,62 +56,69 @@
                 app:layout_constraintVertical_bias="0.0" />
 
 
-            <TextView
-                android:id="@+id/codeMessageSender"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/chivoregular"
-                android:text="Sender Sender "
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/codeArrowimageView"
-                app:layout_constraintStart_toEndOf="@id/codeProfilePic"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/codeArrowimageView"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="2dp"
-                android:paddingTop="3dp"
-                app:layout_constraintEnd_toStartOf="@id/codeMessageReceiver"
-                app:layout_constraintStart_toEndOf="@id/codeMessageSender"
+            <LinearLayout
+                android:layout_width="match_parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/rightarrowicon" />
+                android:layout_marginStart="60dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toEndOf="@id/codeProfilePic"
+                android:layout_height="20dp">
 
-            <TextView
-                android:id="@+id/codeMessageReceiver"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/chivoregular"
-                android:text="Receiver"
-                android:ellipsize="end"
-            android:maxLines="1"
-            android:singleLine="true"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                app:layout_constraintEnd_toStartOf="@id/textView9"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/codeMessageSender"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/chivoregular"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="S"
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/chivoregular"
-                android:text="more"
-                android:textColor="#C1A0EE"
-                android:textSize="18dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/codeArrowimageView"
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignRight="@+id/codeMessageSender"
+                   app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/rightarrowicon"/>
+
+                <TextView
+                    android:id="@+id/codeMessageReceiver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:layout_marginEnd="30dp"
+                    android:fontFamily="@font/chivoregular"
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text="Rejj"
+                    android:gravity="center|end"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+<!--                <TextView-->
+<!--                    android:id="@+id/textView9"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_alignRight="@+id/codeMessageReceiver"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:fontFamily="@font/chivoregular"-->
+<!--                    android:text="more"-->
+<!--                    android:textColor="#C1A0EE"-->
+<!--                    android:textSize="12dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+            </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -120,22 +127,43 @@
             android:id="@+id/codeMessagetextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Code Linesxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            android:text="Code"
             android:ellipsize="end"
             android:maxLines="5"
             android:textColor="#000000"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            />
 
-        <TextView
-            android:id="@+id/codeTimeOfMessagetextView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:text="Time of sending"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_weight="0.2"
+                                android:fontFamily="@font/chivoregular"
+                                android:text="more..."
+                                android:textColor="#C1A0EE"
+                                android:textSize="12dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/codeTimeOfMessagetextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="Time of sending"
+                android:textColor="#000000"
+                android:textSize="12sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

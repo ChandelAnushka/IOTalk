@@ -42,8 +42,10 @@
             android:layout_marginTop="0dp"
             android:fontFamily="@font/chivoregular"
             android:gravity="center"
+            android:textSize="16dp"
             android:text="Code Language "
             android:textColor="#000000" />
+
 
         <ImageView
             android:id="@+id/codeLanguageCheckboximageView"
