@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activities.IOCamera"></activity>
+        <activity android:name=".Activities.IOCamera"/>
         <activity android:name=".Activities.NewChatButton" />
         <activity android:name=".Activities.Chat" />
         <activity android:name=".Activities.ChatList" />
@@ -35,8 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Activities.UserDetail" />
+        <activity android:name=".Activities.StarredMessages"/>
+        <activity android:name=".Activities.UserDetail"/>
+        <activity android:name=".Activities.ChatDetail"/>
     </application>
 
 </manifest>
